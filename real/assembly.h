@@ -477,7 +477,7 @@ static __inline int CLZ(int x)
 
 #else
 
-#warning "Using default platform in assembly.h. Consider optimizing."
+#pragma message "Using default platform in assembly.h. Consider optimizing."
 
 typedef long long Word64;
 
