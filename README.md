@@ -1,3 +1,6 @@
+
+[![CMake on multiple platforms](https://github.com/chmorgan/libhelix-mp3/actions/workflows/cmake-multi-platform.yml/badge.svg)](https://github.com/chmorgan/libhelix-mp3/actions/workflows/cmake-multi-platform.yml)
+
 Fixed-point MP3 decoder
 Developed by RealNetworks, 2003
 ===============================
@@ -99,8 +102,8 @@ be ordered differently for optimization purposes, scaled differently, etc.
 
 IPP 
 --- 
-For certain platforms Intel® has created highly-optimized object code libraries of DSP 
-routines. These are called the Intel® Integrated Performance Primitives (IPP). If IPP 
+For certain platforms Intel? has created highly-optimized object code libraries of DSP 
+routines. These are called the Intel? Integrated Performance Primitives (IPP). If IPP 
 libraries are available for a platform, this MP3 decoder can link them in and use them 
 instead of the RealNetworks source code. To use IPP, you still need to build the top-level 
 files (mp3dec.c, mp3tabs.c). You also build the files in ipp/*.c. These are just thin 
@@ -110,12 +113,12 @@ included in this module. You must obtain them WITH A LICENSE directly from Intel
 Further info on the latest versions of IPP (as of the date of this readme) is available 
 from the URLs below
 
-Intel® Integrated Performance Primitives for the 
-Intel® PXA25x and PXA26x family of Processors, Version 3.0 
+Intel? Integrated Performance Primitives for the 
+Intel? PXA25x and PXA26x family of Processors, Version 3.0 
 * http://www.intel.com/design/pca/applicationsprocessors/swsup/IPPv30.htm
 
-Intel® Integrated Performance Primitives for 
-Intel® Pentium® Processors and Intel® Itanium® Architectures 
+Intel? Integrated Performance Primitives for 
+Intel? Pentium? Processors and Intel? Itanium? Architectures 
 * http://www.intel.com/software/products/ipp/ipp30/
 
 These sites explain how to obtain IPP and the terms under which IPP libraries may be used.
