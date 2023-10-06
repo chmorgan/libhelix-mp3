@@ -51,7 +51,7 @@ Adding support for a new processor is fairly simple. Simply add a new block to t
 real/assembly.h which implements the required inline assembly functions for your processor. 
 Something like
 
-...
+```
 #elif defined NEW_PROCESSOR
 
 /* you implement MULSHIFT32() and so forth */
@@ -59,6 +59,7 @@ Something like
 #else
 #error Unsupported platform in assembly.h
 #endif
+```
 
 Optionally you can rewrite or add assembly language files optimized for your platform. Note 
 that many of the algorithms are designed for an ARM-type processor, so performance of the
@@ -69,36 +70,31 @@ Umakefil as a template for which source files to include.
 
 Directory structure
 -------------------
-fixpt/           platform-independent code and tables, public API
-fixpt/docs       algorithm notes, memory and CPU usage figures, optimization suggestions
-fixpt/ipp        source code which uses IPP for decoding (see the "IPP" section below)
-fixpt/pub        public header files
-fixpt/real       source code for RealNetworks' MP3 decoder
-fixpt/testwrap   sample code to build a command-line test application
+    docs       algorithm notes, memory and CPU usage figures, optimization suggestions
+    pub        public header files
+    real       source code for RealNetworks' MP3 decoder
+    testwrap   sample code to build a command-line test application
 
 Code organization
 -----------------
-fixpt/
-  mpadecobj.cpp     optional shim which exports API used by Helix clients (see mp3/renderer)
-  mp3dec.c          main decode functions, exports C-only API
-  mp3tabs.c         common tables used by all implementations (bitrates, frame sizes, etc.)
-fixpt/pub/
-  mp3common.h       defines low-level codec API which mp3dec.c calls
-  mp3dec.h          defines high-level codec API which applications call
-  mpadecobjfixpt.h  optional C++ shim API (only necessary if mpadecobj.cpp is used)
-  statname.h        symbols which get name-mangled by C preprocessor to allow static linking
-fixpt/ipp           source code for wrapper files which link in IPP libraries
-fixpt/real          full source code for RealNetworks MP3 decoder
+    mp3dec.c          main decode functions, exports C-only API
+    mp3tabs.c         common tables used by all implementations (bitrates, frame sizes, etc.)
+    /pub/
+        mp3common.h       defines low-level codec API which mp3dec.c calls
+        mp3dec.h          defines high-level codec API which applications call
+        mpadecobjfixpt.h  optional C++ shim API (only necessary if mpadecobj.cpp is used)
+        statname.h        symbols which get name-mangled by C preprocessor to allow static linking
+    /real          full source code for RealNetworks MP3 decoder
 
-To build an MP3 decoder library, you'll need to compile the top-level files and EITHER 
-real/*.c OR ipp/*.c and the correct IPP library. 
+To build an MP3 decoder library, you'll need to compile the top-level files and EITHER
+real/*.c OR ipp/*.c and the correct IPP library.
 
 Decoder using Real code: mp3dec.c + mp3tabs.c + real/*.c + real/arm/[files].s (if ARM)
 Decoder using IPP code:  mp3dec.c + mp3tabs.c + ipp/*.c + ippac*.lib
 
 Although the real/ and ipp/ source code follow the same top-level API (for Dequantize(),
-Subband(), etc.) mixing and matching is not guaranteed to work. The outputs might 
-be ordered differently for optimization purposes, scaled differently, etc. 
+Subband(), etc.) mixing and matching is not guaranteed to work. The outputs might
+be ordered differently for optimization purposes, scaled differently, etc.
 
 IPP 
 --- 
@@ -128,17 +124,13 @@ libraries from Intel.
 
 To-Do list and status
 ---------------------
-faster/lower-memory dequantizer        (in progress)
-tighter fixed-point scaling            (in progress)
-remove all run-time math calls (/, %)  (in progress)
-ARM assembly code for DCT32, IMDCT     (if necessary)
-add test scripts and compliance docs
-write 32-bit C polyphase filter
+* faster/lower-memory dequantizer        (in progress)
+* tighter fixed-point scaling            (in progress)
+* remove all run-time math calls (/, %)  (in progress)
+* ARM assembly code for DCT32, IMDCT     (if necessary)
+* add test scripts and compliance docs
+* write 32-bit C polyphase filter
   (where 64-bit MACC not available)
 
 As these optimizations are completed, they will be added to the Helix codebase. Please 
 continue to check there for updates. Changes will be noted in this readme. 
-
-readme.txt last updated 07/23/03
-
-
