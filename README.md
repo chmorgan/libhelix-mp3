@@ -1,16 +1,17 @@
 
 [![CMake on multiple platforms](https://github.com/chmorgan/libhelix-mp3/actions/workflows/cmake-multi-platform.yml/badge.svg)](https://github.com/chmorgan/libhelix-mp3/actions/workflows/cmake-multi-platform.yml)
 
-Fixed-point MP3 decoder
-Developed by RealNetworks, 2003
-===============================
+# Fixed-point MP3 decoder
 
-Overview
---------
+Originally developed by RealNetworks, 2003
+
+# Overview
+
 This module contains a high-performance MPEG layer 3 audio decoder for 32-bit fixed-point 
 processors. The following is a quick summary of what is and is not supported:
 
-Supported
+## Supported
+
  - layer 3
  - MPEG1, MPEG2, and MPEG2.5 (low sampling frequency extensions)
  - constant bitrate, variable bitrate, and free bitrate modes
@@ -19,8 +20,8 @@ Supported
 Not currently supported
  - layers 1 and 2
 
-Highlights
-----------
+# Highlights
+
  - highly optimized for ARM processors (details in docs/ subdirectory)
  - reference x86 implementation
  - C and assembly code only (C++ not required)
@@ -28,8 +29,8 @@ Highlights
  - low memory (details in docs/ subdirectory)
  - option to use Intel Integrated Performance Primitives (details below)
 
-Supported platforms and toolchains
-----------------------------------
+# Supported platforms and toolchains
+
 This codec should run on any 32-bit fixed-point processor which can perform a full 32x32-bit 
 multiply (providing a 64-bit result). The following processors and toolchains are supported:
  - x86, Microsoft Visual C++
@@ -37,6 +38,7 @@ multiply (providing a 64-bit result). The following processors and toolchains ar
  - ARM, Microsoft Embedded Visual C++
  - ARM, GNU toolchain (gcc)
  - RISC-V, GNU toolchain (gcc)
+ - Xtensa (ESP32)
 
 ARM refers to any processor supporting ARM architecture v.4 or above. Thumb is not required.
 Typically this means an ARM7TDMI or better (including ARM9, StrongARM, XScale, etc.)
@@ -46,6 +48,16 @@ ARM targets, so calls to MULSHIFT32 (smull on ARM) are left as function calls. F
 fastest code on targets which do not normally use ADS consider compiling with ADS, 
 using the -S option to output assembly code, and feeding this assembly code to the assembler 
 of your choice. This might require some syntax changes in the .S file.
+
+
+# Project using this library
+
+- [esp-audio-player](https://components.espressif.com/components/chmorgan/esp-audio-player) (esp-idf component)
+- [esp-box](https://github.com/espressif/esp-box)
+- Open an issue or a PR to add your project here!
+
+
+# Adding support
 
 Adding support for a new processor is fairly simple. Simply add a new block to the file 
 real/assembly.h which implements the required inline assembly functions for your processor. 
