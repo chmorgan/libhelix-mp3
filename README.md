@@ -66,25 +66,25 @@ that many of the algorithms are designed for an ARM-type processor, so performan
 unmodified C code might be noticeably worse on other architectures. 
 
 Adding support for a new toolchain should be straightforward. Use the sample projects or the
-Umakefil as a template for which source files to include.
+CMakeLists.txt as a template for which source files to include.
 
 Directory structure
 -------------------
     docs       algorithm notes, memory and CPU usage figures, optimization suggestions
-    pub        public header files
-    real       source code for RealNetworks' MP3 decoder
+    src        library source code and header files
     testwrap   sample code to build a command-line test application
 
 Code organization
 -----------------
-    mp3dec.c          main decode functions, exports C-only API
-    mp3tabs.c         common tables used by all implementations (bitrates, frame sizes, etc.)
-    /pub/
-        mp3common.h       defines low-level codec API which mp3dec.c calls
-        mp3dec.h          defines high-level codec API which applications call
-        mpadecobjfixpt.h  optional C++ shim API (only necessary if mpadecobj.cpp is used)
-        statname.h        symbols which get name-mangled by C preprocessor to allow static linking
-    /real          full source code for RealNetworks MP3 decoder
+    /src/
+        mp3dec.c              main decode functions, exports C-only API
+        mp3tabs.c             common tables used by all implementations (bitrates, frame sizes, etc.)
+        /pub/
+            mp3common.h       defines low-level codec API which mp3dec.c calls
+            mp3dec.h          defines high-level codec API which applications call
+            mpadecobjfixpt.h  optional C++ shim API (only necessary if mpadecobj.cpp is used)
+            statname.h        symbols which get name-mangled by C preprocessor to allow static linking
+        /real                 full source code for RealNetworks MP3 decoder
 
 To build an MP3 decoder library, you'll need to compile the top-level files and EITHER
 real/*.c OR ipp/*.c and the correct IPP library.
