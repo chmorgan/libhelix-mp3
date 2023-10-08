@@ -57,7 +57,7 @@
  *
  * Return:      none
  **************************************************************************************/
-void SetBitstreamPointer(BitStreamInfo *bsi, int nBytes, unsigned char *buf)
+void SetBitstreamPointer(BitStreamInfo *bsi, int nBytes, const unsigned char *buf)
 {
 	/* init bitstream */
 	bsi->bytePtr = buf;
@@ -162,7 +162,7 @@ unsigned int GetBits(BitStreamInfo *bsi, int nBits)
  *
  * Return:      number of bits read from bitstream, as offset from startBuf:startOffset
  **************************************************************************************/
-int CalcBitsUsed(BitStreamInfo *bsi, unsigned char *startBuf, int startOffset)
+int CalcBitsUsed(BitStreamInfo *bsi, const unsigned char *startBuf, int startOffset)
 {
 	int bitsUsed;
 
@@ -215,7 +215,7 @@ int CheckPadBit(MP3DecInfo *mp3DecInfo)
  * TODO:        check for valid modes, depending on capabilities of decoder
  *              test CRC on actual stream (verify no endian problems)
  **************************************************************************************/
-int UnpackFrameHeader(MP3DecInfo *mp3DecInfo, unsigned char *buf)
+int UnpackFrameHeader(MP3DecInfo *mp3DecInfo, const unsigned char *buf)
 {
 
 	int verIdx;
@@ -296,7 +296,7 @@ int UnpackFrameHeader(MP3DecInfo *mp3DecInfo, unsigned char *buf)
  * Return:      length (in bytes) of side info data
  *              -1 if null input pointers
  **************************************************************************************/
-int UnpackSideInfo(MP3DecInfo *mp3DecInfo, unsigned char *buf)
+int UnpackSideInfo(MP3DecInfo *mp3DecInfo, const unsigned char *buf)
 {
 	int gr, ch, bd, nBytes;
 	BitStreamInfo bitStreamInfo, *bsi;

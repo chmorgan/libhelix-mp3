@@ -107,7 +107,7 @@ void MP3FreeDecoder(HMP3Decoder hMP3Decoder)
  * Return:      offset to first sync word (bytes from start of buf)
  *              -1 if sync not found after searching nBytes
  **************************************************************************************/
-int MP3FindSyncWord(unsigned char *buf, int nBytes)
+int MP3FindSyncWord(const unsigned char *buf, int nBytes)
 {
 	int i;
 
@@ -144,10 +144,10 @@ int MP3FindSyncWord(unsigned char *buf, int nBytes)
  *                this function once (first frame) then store the result (nSlots)
  *                and just use it from then on
  **************************************************************************************/
-static int MP3FindFreeSync(unsigned char *buf, unsigned char firstFH[4], int nBytes)
+static int MP3FindFreeSync(const unsigned char *buf, const unsigned char firstFH[4], int nBytes)
 {
 	int offset = 0;
-	unsigned char *bufPtr = buf;
+	const unsigned char *bufPtr = buf;
 
 	/* loop until we either: 
 	 *  - run out of nBytes (FindMP3SyncWord() returns -1)
@@ -283,11 +283,11 @@ static void MP3ClearBadFrame(MP3DecInfo *mp3DecInfo, short *outbuf)
  * Notes:       switching useSize on and off between frames in the same stream 
  *                is not supported (bit reservoir is not maintained if useSize on)
  **************************************************************************************/
-int MP3Decode(HMP3Decoder hMP3Decoder, unsigned char **inbuf, int *bytesLeft, short *outbuf, int useSize)
+int MP3Decode(HMP3Decoder hMP3Decoder, const unsigned char **inbuf, size_t *bytesLeft, short *outbuf, int useSize)
 {
 	int offset, bitOffset, mainBits, gr, ch, fhBytes, siBytes, freeFrameBytes;
 	int prevBitOffset, sfBlockBits, huffBlockBits;
-	unsigned char *mainPtr;
+	const unsigned char *mainPtr;
 	MP3DecInfo *mp3DecInfo = (MP3DecInfo *)hMP3Decoder;
 	
 	#ifdef PROFILE

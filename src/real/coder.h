@@ -126,7 +126,7 @@ typedef enum {
 } StereoMode;
 
 typedef struct _BitStreamInfo {
-	unsigned char *bytePtr;
+	const unsigned char *bytePtr;
 	unsigned int iCache;
 	int cachedBits;
 	int nBytes;
@@ -256,9 +256,9 @@ typedef struct _SubbandInfo {
 } SubbandInfo;
 
 /* bitstream.c */
-void SetBitstreamPointer(BitStreamInfo *bsi, int nBytes, unsigned char *buf);
+void SetBitstreamPointer(BitStreamInfo *bsi, int nBytes, const unsigned char *buf);
 unsigned int GetBits(BitStreamInfo *bsi, int nBits);
-int CalcBitsUsed(BitStreamInfo *bsi, unsigned char *startBuf, int startOffset);
+int CalcBitsUsed(BitStreamInfo *bsi, const unsigned char *startBuf, int startOffset);
 
 /* dequant.c, dqchan.c, stproc.c */
 int DequantChannel(int *sampleBuf, int *workBuf, int *nonZeroBound, FrameHeader *fh, SideInfoSub *sis, 
