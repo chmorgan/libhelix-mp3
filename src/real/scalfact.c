@@ -349,10 +349,10 @@ static void UnpackSFMPEG2(BitStreamInfo *bsi, SideInfoSub *sis, ScaleFactorInfoS
  *
  * Return:      length (in bytes) of scale factor data, -1 if null input pointers
  **************************************************************************************/
-int UnpackScaleFactors(MP3DecInfo *mp3DecInfo, unsigned char *buf, int *bitOffset, int bitsAvail, int gr, int ch)
+int UnpackScaleFactors(MP3DecInfo *mp3DecInfo, const unsigned char *buf, int *bitOffset, int bitsAvail, int gr, int ch)
 {
 	int bitsUsed;
-	unsigned char *startBuf;
+	const unsigned char *startBuf;
 	BitStreamInfo bitStreamInfo, *bsi;
 	FrameHeader *fh;
 	SideInfo *si;

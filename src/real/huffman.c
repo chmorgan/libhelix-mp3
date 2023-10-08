@@ -80,7 +80,7 @@
  *                necessarily all linBits outputs for x,y > 15)
  **************************************************************************************/
 // no improvement with section=data
-static int DecodeHuffmanPairs(int *xy, int nVals, int tabIdx, int bitsLeft, unsigned char *buf, int bitOffset)
+static int DecodeHuffmanPairs(int *xy, int nVals, int tabIdx, int bitsLeft, const unsigned char *buf, int bitOffset)
 {
 	int i, x, y;
 	int cachedBits, padBits, len, startBits, linBits, maxBits, minBits;
@@ -284,7 +284,7 @@ static int DecodeHuffmanPairs(int *xy, int nVals, int tabIdx, int bitsLeft, unsi
  * Notes:        si_huff.bit tests every vwxy output in both quad tables
  **************************************************************************************/
 // no improvement with section=data
-static int DecodeHuffmanQuads(int *vwxy, int nVals, int tabIdx, int bitsLeft, unsigned char *buf, int bitOffset)
+static int DecodeHuffmanQuads(int *vwxy, int nVals, int tabIdx, int bitsLeft, const unsigned char *buf, int bitOffset)
 {
 	int i, v, w, x, y;
 	int len, maxBits, cachedBits, padBits;
@@ -377,11 +377,11 @@ static int DecodeHuffmanQuads(int *vwxy, int nVals, int tabIdx, int bitsLeft, un
  *                out of bits prematurely (invalid bitstream)
  **************************************************************************************/
 // .data about 1ms faster per frame
-int DecodeHuffman(MP3DecInfo *mp3DecInfo, unsigned char *buf, int *bitOffset, int huffBlockBits, int gr, int ch)
+int DecodeHuffman(MP3DecInfo *mp3DecInfo, const unsigned char *buf, int *bitOffset, int huffBlockBits, int gr, int ch)
 {
 	int r1Start, r2Start, rEnd[4];	/* region boundaries */
 	int i, w, bitsUsed, bitsLeft;
-	unsigned char *startBuf = buf;
+	const unsigned char *startBuf = buf;
 
 	FrameHeader *fh;
 	SideInfo *si;
